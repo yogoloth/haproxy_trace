@@ -6,6 +6,7 @@
 #include <arpa/inet.h>
 
 
+
 #define NODE_DATA_SIZE 4096
 
 typedef struct
@@ -25,5 +26,11 @@ typedef struct sock_tcp
   fd_ports ports;
 } sock_tcp_t;
 
-void *
+RB_HEAD (sock_addr, sock_tcp) head ;
+
+int cmp (sock_tcp_t *e1, sock_tcp_t *e2);
+
+RB_PROTOTYPE (sock_addr, sock_tcp, entry, cmp);
+
+struct sock_addr*
 create_sockaddr_map (const char *proc_tcp_file);

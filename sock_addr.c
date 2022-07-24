@@ -12,10 +12,10 @@
 #define verbose 1
 
 
+struct sock_addr  head = RB_INITIALIZER (&head);
 
+RB_GENERATE (sock_addr, sock_tcp, entry, cmp);
 
-
-RB_HEAD (sock_addr, sock_tcp) head = RB_INITIALIZER (&head);
 
 int
 cmp (sock_tcp_t *e1, sock_tcp_t *e2)
@@ -23,7 +23,6 @@ cmp (sock_tcp_t *e1, sock_tcp_t *e2)
     return e1->sockfd > e2->sockfd;
 }
 
-RB_GENERATE (sock_addr, sock_tcp, entry, cmp);
 
 static char* substr(const char*str, unsigned start, unsigned end)
 {
@@ -34,7 +33,7 @@ static char* substr(const char*str, unsigned start, unsigned end)
     return stbuf;
 }
 
-void *
+struct sock_addr*
 create_sockaddr_map (proc_tcp_file)
      const char *proc_tcp_file;
 {
@@ -65,7 +64,7 @@ create_sockaddr_map (proc_tcp_file)
             printf("parsed: %x %x %x %x %llu\n",pports->ip1,pports->port1,pports->ip2,pports->port2,st.sockfd);
             printf("parsed to human: %s %u %s %u %llu\n",inet_ntoa(*(struct in_addr*)&pports->ip1),pports->port1,inet_ntoa(*(struct in_addr*)&pports->ip2),pports->port2,st.sockfd);
           }
-          RB_INSERT(sock_tcp, &head, &st);
+          RB_INSERT(sock_addr, &head, &st);
 
       }
 
