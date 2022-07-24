@@ -7,27 +7,34 @@
 #include "sock_addr.h"
 #include <string.h>
 
-
 #define DEBUG
 
-#define IP1 3
-#define IP2 4
-#define PID 10
+#define verbose 1
+
+
+
 
 
 RB_HEAD (sock_addr, sock_tcp) head = RB_INITIALIZER (&head);
 
 int
-cmp (struct sock_tcp *e1, struct sock_tcp *e2)
+cmp (sock_tcp_t *e1, sock_tcp_t *e2)
 {
     return e1->sockfd > e2->sockfd;
 }
 
 RB_GENERATE (sock_addr, sock_tcp, entry, cmp);
 
+static char* substr(const char*str, unsigned start, unsigned end)
+{
+    unsigned n = end - start;
+    static char stbuf[256];
+    strncpy(stbuf, str + start, n);
+    stbuf[n] = 0;
+    return stbuf;
+}
 
-
-struct sock_addr *
+void *
 create_sockaddr_map (proc_tcp_file)
      const char *proc_tcp_file;
 {
@@ -43,30 +50,22 @@ create_sockaddr_map (proc_tcp_file)
     {
       char buffer[NODE_DATA_SIZE];
       char* p_data=&(buffer[0]);
+      char dummy[255];
+      sock_tcp_t st;
+      fd_ports* pports=&(st.ports);
       while (fgets ((char *) p_data, NODE_DATA_SIZE,fp) != NULL)
       {
           if (verbose)
               //fprintf (stderr, "load %s %d\n", n_data, n_count);
               fputs(p_data,stderr);
-          char *p=NULL;
-          int i=0;
-          while((p=strsep(&p_data," "))!=NULL)
+//1268: 5E10E00A:4A70 5077A80A:0CEA 01 00000000:00000000 00:00000000 00000000     0        0 296798886 1 ffff942f60e31f00 24 4 30 2 2
+          sscanf(p_data,"%s %x:%x %x:%x %s %s %s %s %s %s %llu",dummy,&pports->ip1,&pports->port1,&pports->ip2,&pports->port2,dummy,dummy,dummy,dummy,dummy,dummy,&st.sockfd);
+          if (verbose)
           {
-                      printf("a %s\n",p);
-              switch(++i){
-                  case IP1:
-                      printf("%s\n",p);
-                      break;
-                  case IP2:
-                      printf("%s\n",p);
-                      break;
-                  case PID:
-                      printf("%s\n",p);
-                      break;
-              
-              }
-
+            printf("parsed: %x %x %x %x %llu\n",pports->ip1,pports->port1,pports->ip2,pports->port2,st.sockfd);
+            printf("parsed to human: %s %u %s %u %llu\n",inet_ntoa(*(struct in_addr*)&pports->ip1),pports->port1,inet_ntoa(*(struct in_addr*)&pports->ip2),pports->port2,st.sockfd);
           }
+          RB_INSERT(sock_tcp, &head, &st);
 
       }
 
