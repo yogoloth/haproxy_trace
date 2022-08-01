@@ -26,11 +26,11 @@ typedef struct sock_tcp
   fd_ports ports;
 } sock_tcp_t;
 
-RB_HEAD (sock_addr, sock_tcp) head ;
+RB_HEAD (SOCK_ADDR, sock_tcp) head ;
 
-int cmp (sock_tcp_t *e1, sock_tcp_t *e2);
+//int cmp (sock_tcp_t *e1, sock_tcp_t *e2);
 
-RB_PROTOTYPE (sock_addr, sock_tcp, entry, cmp);
+RB_PROTOTYPE (SOCK_ADDR, sock_tcp, entry, cmp);
 
-struct sock_addr*
+struct SOCK_ADDR*
 create_sockaddr_map (const char *proc_tcp_file);

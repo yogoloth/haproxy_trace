@@ -4,7 +4,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "sock_addr.h"
+#include "SOCK_ADDR.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -13,9 +13,8 @@
 //#define verbose 1
 
 
-struct sock_addr  head = RB_INITIALIZER (&head);
+struct SOCK_ADDR  head = RB_INITIALIZER (&head);
 
-RB_GENERATE (sock_addr, sock_tcp, entry, cmp);
 
 
 int
@@ -31,8 +30,9 @@ cmp (sock_tcp_t *e1, sock_tcp_t *e2)
 }
 
 
+RB_GENERATE (SOCK_ADDR, sock_tcp, entry, cmp);
 
-struct sock_addr*
+struct SOCK_ADDR*
 create_sockaddr_map (proc_tcp_file)
      const char *proc_tcp_file;
 {
@@ -64,14 +64,14 @@ create_sockaddr_map (proc_tcp_file)
             fprintf(stderr,"parsed to human: %s %u %s %u %llu\n",inet_ntoa(*(struct in_addr*)&pports->ip1),pports->port1,inet_ntoa(*(struct in_addr*)&pports->ip2),pports->port2,pst->sockfd);
           #endif
           sock_tcp_t *exists_sock_tcp;
-          if((exists_sock_tcp=RB_INSERT(sock_addr, &head, pst))!=NULL){
-            fprintf(stderr,"[ERROR] insert rb_sock_addr, sockfd exists %llu\n",exists_sock_tcp->sockfd);
+          if((exists_sock_tcp=RB_INSERT(SOCK_ADDR, &head, pst))!=NULL){
+            fprintf(stderr,"[ERROR] insert rb_SOCK_ADDR, sockfd exists %llu\n",exists_sock_tcp->sockfd);
           
           }
 
           //printf("after insert:\n");
           //sock_tcp_t* pst_2;
-          //RB_FOREACH(pst_2, sock_addr, &head){
+          //RB_FOREACH(pst_2, SOCK_ADDR, &head){
           //    fd_ports* pports=&(pst_2->ports);
           //    printf("after rb_insert: %x %x %x %x %llu\n",pports->ip1,pports->port1,pports->ip2,pports->port2,pst_2->sockfd);
           //    printf("after rb_insert to human: %s %u %s %u %llu\n",inet_ntoa(*(struct in_addr*)&pports->ip1),pports->port1,inet_ntoa(*(struct in_addr*)&pports->ip2),pports->port2,pst_2->sockfd);

@@ -1,2 +1,4 @@
 haproxy_trace
 test_sock_addr
+test_fd_sock
+.sock_addr.h.swp
