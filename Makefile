@@ -21,3 +21,5 @@ tags:
 
 clean:
 	rm test_sock_addr haproxy_trace
+
+.PHONY: tags clean

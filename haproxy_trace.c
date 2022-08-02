@@ -5,39 +5,22 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
+#include "fd_sock.h"
+#include "sock_addr.h"
+
 
 typedef enum {
    from,
    to
 } dirt;
 
-typedef struct {
-    struct in_addr ip1;
-    int port1;
-    struct in_addr ip2;
-    int port2;
-}fd_ports;
-
-struct sock_tcp
-{
-    RB_ENTRY (sock_tcp) entry;
-    long long sockfd;
-    fd_ports ports;
-};
-
-struct fd_sock
-{
-    RB_ENTRY (fd_sock) entry;
-    int fd;
-    long long sockfd;
-};
 
 fd_ports*
-fd_to_ports(pid,fd,proc_file,sock_file,d)
+fd_to_ports(pid,fd,sa_map,fs_map,d)
     pid_t pid;
     int fd;
-    char* proc_file;
-    char* sock_file;
+    struct SOCK_ADDR* sa_map;
+    struct FD_SOCK* fs_map;
     dirt d;
 {
     return NULL;
@@ -50,7 +33,10 @@ main(argc,argv)
     int argc;
     char *argv[];
 {
-    fd_ports* ports=fd_to_ports(3321,609,"sample/proc_file","sample/socket_file",from);
+    struct SOCK_ADDR* sa_map=create_sockaddr_map("sample/proc_file");
+    struct FD_SOCK* fs_map=create_fdsock_map("sample/socket_file");
+
+    fd_ports* ports=fd_to_ports(3321,609,sa_map,fs_map,from);
     //printf("%s\n",ports_str);
     return 0;
 }

@@ -26,7 +26,7 @@ typedef struct sock_tcp
   fd_ports ports;
 } sock_tcp_t;
 
-RB_HEAD (SOCK_ADDR, sock_tcp) head ;
+RB_HEAD (SOCK_ADDR, sock_tcp)  ;
 
 //int cmp (sock_tcp_t *e1, sock_tcp_t *e2);
 

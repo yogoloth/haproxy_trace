@@ -31,6 +31,18 @@ cmp (fd_sock_t *e1, fd_sock_t *e2)
 
 RB_GENERATE (FD_SOCK, fd_sock, entry, cmp);
 
+
+
+fd_sock_t*
+get_fdsock_by_fd(fd_sock_map,fd)
+    struct FD_SOCK* fd_sock_map;
+    unsigned long long fd;
+{
+    fd_sock_t find;
+    find.fd = fd;
+    return RB_FIND(FD_SOCK,fd_sock_map,&find);
+}
+
 struct FD_SOCK*
 create_fdsock_map (fd_sock_file)
      const char *fd_sock_file;

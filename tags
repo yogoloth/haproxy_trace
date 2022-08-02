@@ -5,39 +5,37 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 CFLAGS	Makefile	/^CFLAGS=-g -g3$/;"	m
-DEBUG	sock_addr.c	11;"	d	file:
+NODE_DATA_SIZE	fd_sock.h	7;"	d
 NODE_DATA_SIZE	sock_addr.h	10;"	d
+cmp	fd_sock.c	/^cmp (fd_sock_t *e1, fd_sock_t *e2)$/;"	f
 cmp	sock_addr.c	/^cmp (sock_tcp_t *e1, sock_tcp_t *e2)$/;"	f
+create_fdsock_map	fd_sock.c	/^create_fdsock_map (fd_sock_file)$/;"	f
 create_sockaddr_map	sock_addr.c	/^create_sockaddr_map (proc_tcp_file)$/;"	f
 dirt	haproxy_trace.c	/^} dirt;$/;"	t	typeref:enum:__anon1	file:
+entry	fd_sock.h	/^  RB_ENTRY (fd_sock) entry;$/;"	m	struct:fd_sock
 entry	sock_addr.h	/^  RB_ENTRY (sock_tcp) entry;$/;"	m	struct:sock_tcp
-fd	haproxy_trace.c	/^    int fd;$/;"	m	struct:fd_sock	file:
-fd_ports	haproxy_trace.c	/^}fd_ports;$/;"	t	typeref:struct:__anon2	file:
-fd_ports	sock_addr.h	/^} fd_ports;$/;"	t	typeref:struct:__anon3
-fd_sock	haproxy_trace.c	/^struct fd_sock$/;"	s	file:
-fd_to_ports	haproxy_trace.c	/^fd_to_ports(pid,fd,proc_file,sock_file,d)$/;"	f
+fd	fd_sock.h	/^  unsigned long long fd;$/;"	m	struct:fd_sock
+fd_ports	sock_addr.h	/^} fd_ports;$/;"	t	typeref:struct:__anon2
+fd_sock	fd_sock.h	/^typedef struct fd_sock$/;"	s
+fd_sock_t	fd_sock.h	/^} fd_sock_t;$/;"	t	typeref:struct:fd_sock
+fd_to_ports	haproxy_trace.c	/^fd_to_ports(pid,fd,sa_map,fs_map,d)$/;"	f
+find_fdsock	fd_sock.c	/^find_fdsock(fd_sock_map,fd)$/;"	f
 from	haproxy_trace.c	/^   from,$/;"	e	enum:__anon1	file:
-head	sock_addr.c	/^struct sock_addr  head = RB_INITIALIZER (&head);$/;"	v	typeref:struct:sock_addr
+head	fd_sock.c	/^struct FD_SOCK  head = RB_INITIALIZER (&head);$/;"	v	typeref:struct:FD_SOCK
+head	sock_addr.c	/^struct SOCK_ADDR  head = RB_INITIALIZER (&head);$/;"	v	typeref:struct:SOCK_ADDR
 hex2ip	fd2ports.sh	/^function hex2ip(){$/;"	f
 hex2port	fd2ports.sh	/^function hex2port(){$/;"	f
 hexaddr2addr	fd2ports.sh	/^function hexaddr2addr(){$/;"	f
-ip1	haproxy_trace.c	/^    struct in_addr ip1;$/;"	m	struct:__anon2	typeref:struct:__anon2::in_addr	file:
-ip1	sock_addr.h	/^  in_addr_t ip1;$/;"	m	struct:__anon3
-ip2	haproxy_trace.c	/^    struct in_addr ip2;$/;"	m	struct:__anon2	typeref:struct:__anon2::in_addr	file:
-ip2	sock_addr.h	/^  in_addr_t ip2;$/;"	m	struct:__anon3
+ip1	sock_addr.h	/^  in_addr_t ip1;$/;"	m	struct:__anon2
+ip2	sock_addr.h	/^  in_addr_t ip2;$/;"	m	struct:__anon2
 main	haproxy_trace.c	/^main(argc,argv)$/;"	f
+main	test_fd_sock.c	/^int main(int argc,char *argv[]){$/;"	f
 main	test_sock_addr.c	/^int main(int argc,char *argv[]){$/;"	f
-port1	haproxy_trace.c	/^    int port1;$/;"	m	struct:__anon2	file:
-port1	sock_addr.h	/^  int port1;$/;"	m	struct:__anon3
-port2	haproxy_trace.c	/^    int port2;$/;"	m	struct:__anon2	file:
-port2	sock_addr.h	/^  int port2;$/;"	m	struct:__anon3
-ports	haproxy_trace.c	/^    fd_ports ports;$/;"	m	struct:sock_tcp	file:
+port1	sock_addr.h	/^  int port1;$/;"	m	struct:__anon2
+port2	sock_addr.h	/^  int port2;$/;"	m	struct:__anon2
 ports	sock_addr.h	/^  fd_ports ports;$/;"	m	struct:sock_tcp
-sock_tcp	haproxy_trace.c	/^struct sock_tcp$/;"	s	file:
 sock_tcp	sock_addr.h	/^typedef struct sock_tcp$/;"	s
 sock_tcp_t	sock_addr.h	/^} sock_tcp_t;$/;"	t	typeref:struct:sock_tcp
-sockfd	haproxy_trace.c	/^    long long sockfd;$/;"	m	struct:fd_sock	file:
-sockfd	haproxy_trace.c	/^    long long sockfd;$/;"	m	struct:sock_tcp	file:
+sockfd	fd_sock.h	/^  unsigned long long sockfd;$/;"	m	struct:fd_sock
 sockfd	sock_addr.h	/^  unsigned long long sockfd;$/;"	m	struct:sock_tcp
 to	haproxy_trace.c	/^   to$/;"	e	enum:__anon1	file:
-verbose	sock_addr.c	13;"	d	file:

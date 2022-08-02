@@ -14,11 +14,12 @@ typedef struct fd_sock
   unsigned long long sockfd;
 } fd_sock_t;
 
-RB_HEAD (FD_SOCK, fd_sock) head ;
+RB_HEAD (FD_SOCK, fd_sock)  ;
 
 //int cmp (fd_sock_t *e1, fd_sock_t *e2);
 
 RB_PROTOTYPE (FD_SOCK, fd_sock, entry, cmp);
 
-struct FD_SOCK*
-create_fdsock_map (const char *fd_sock_file);
+struct FD_SOCK* create_fdsock_map (const char *fd_sock_file);
+
+fd_sock_t* get_fdsock_by_fd( struct FD_SOCK* fd_sock_map, unsigned long long fd);
