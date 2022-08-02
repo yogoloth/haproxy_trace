@@ -4,7 +4,7 @@
 
 
 
-#define NODE_DATA_SIZE 512
+//#define NODE_DATA_SIZE 512
 
 
 typedef struct fd_sock
@@ -18,7 +18,7 @@ RB_HEAD (FD_SOCK, fd_sock)  ;
 
 //int cmp (fd_sock_t *e1, fd_sock_t *e2);
 
-RB_PROTOTYPE (FD_SOCK, fd_sock, entry, cmp);
+RB_PROTOTYPE (FD_SOCK, fd_sock, entry, fd_sock_cmp);
 
 struct FD_SOCK* create_fdsock_map (const char *fd_sock_file);
 

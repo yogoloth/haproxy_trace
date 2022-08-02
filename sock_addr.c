@@ -13,11 +13,14 @@
 //#define verbose 1
 
 
-struct SOCK_ADDR  head = RB_INITIALIZER (&head);
+#define NODE_DATA_SIZE 4096
+
+
+static struct SOCK_ADDR  head = RB_INITIALIZER (&head);
 
 
 
-int
+static int
 cmp (sock_tcp_t *e1, sock_tcp_t *e2)
 {
     if (e1->sockfd == e2->sockfd){
@@ -31,6 +34,17 @@ cmp (sock_tcp_t *e1, sock_tcp_t *e2)
 
 
 RB_GENERATE (SOCK_ADDR, sock_tcp, entry, cmp);
+
+
+sock_tcp_t*
+get_socktcp_by_sock(sock_tcp_map,sockno)
+      struct SOCK_ADDR* sock_tcp_map;
+      unsigned long long sockno;
+{
+      sock_tcp_t find;
+      find.sockfd = sockno;
+      return RB_FIND(SOCK_ADDR,sock_tcp_map,&find);
+}
 
 struct SOCK_ADDR*
 create_sockaddr_map (proc_tcp_file)
@@ -65,7 +79,7 @@ create_sockaddr_map (proc_tcp_file)
           #endif
           sock_tcp_t *exists_sock_tcp;
           if((exists_sock_tcp=RB_INSERT(SOCK_ADDR, &head, pst))!=NULL){
-            fprintf(stderr,"[ERROR] insert rb_SOCK_ADDR, sockfd exists %llu\n",exists_sock_tcp->sockfd);
+            fprintf(stderr,"[WARN] insert rb_SOCK_ADDR, sockfd %llu exists\n",exists_sock_tcp->sockfd);
           
           }
 

@@ -12,11 +12,12 @@
 
 //#define verbose 1
 
+#define NODE_DATA_SIZE 512
 
-struct FD_SOCK  head = RB_INITIALIZER (&head);
+static struct FD_SOCK  head = RB_INITIALIZER (&head);
 
 
-int 
+static int 
 cmp (fd_sock_t *e1, fd_sock_t *e2)
 {
     if (e1->fd == e2->fd){

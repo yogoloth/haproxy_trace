@@ -14,7 +14,16 @@ int main(int argc,char *argv[]){
         fprintf(stdout,"after inserted parsed to human: %s %u %s %u %llu\n",inet_ntoa(*(struct in_addr*)&pports->ip1),pports->port1,inet_ntoa(*(struct in_addr*)&pports->ip2),pports->port2,pst->sockfd);
     }
 
-    printf("\n\n");
+    printf("\nparse sample/socket_file result:\n");
+    unsigned long long sample_sockno=305503367;
+    sock_tcp_t* found=get_socktcp_by_sock(sa, sample_sockno);
+    if(found==NULL){
+        printf("get_socktcp_by_sock %llu error\n",sample_sockno);
+    }else{
+        pst=found;
+        fd_ports* pports=&(pst->ports);
+        fprintf(stdout,"get_socktcp_by_sock %llu success: %s %u %s %u %llu\n",sample_sockno,inet_ntoa(*(struct in_addr*)&pports->ip1),pports->port1,inet_ntoa(*(struct in_addr*)&pports->ip2),pports->port2,pst->sockfd);
+    }
 
     return 0;
 }

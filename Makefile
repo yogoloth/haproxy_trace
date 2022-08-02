@@ -1,7 +1,7 @@
 
 CFLAGS=-g -g3
 
-haproxy_trace: haproxy_trace.c
+haproxy_trace: haproxy_trace.c fd_sock.c sock_addr.c
 	gcc -o $@ $^
 
 
@@ -20,6 +20,6 @@ tags:
 	ctags -R .
 
 clean:
-	rm test_sock_addr haproxy_trace
+	rm -f test_sock_addr test_fd_sock haproxy_trace
 
 .PHONY: tags clean
