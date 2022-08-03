@@ -1,9 +1,8 @@
 
 CFLAGS=-g -g3
 
-haproxy_trace: haproxy_trace.c fd_sock.c sock_addr.c
+haproxy_trace: haproxy_trace.c fd_sock.c sock_addr.c fd_route.c
 	gcc -o $@ $^
-
 
 
 test: test_sock_addr test_fd_sock test_fd_route
