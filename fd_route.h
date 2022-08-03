@@ -10,7 +10,7 @@
 #include "sock_addr.h"
 
 
-#define BUFSIZE 1024
+//#define BUFSIZE 1024
 
 typedef enum {
    from,

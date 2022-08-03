@@ -8,6 +8,7 @@
 
 #include "fd_route.h"
 
+#define BUFSIZE 1024
 
 fd_ports*
 fd_to_ports(fd,sa_map,fs_map)
