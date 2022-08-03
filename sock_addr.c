@@ -75,7 +75,7 @@ create_sockaddr_map (proc_tcp_file)
           sscanf(p_data,"%s %x:%x %x:%x %s %s %s %s %s %s %llu",dummy,&pports->ip1,&pports->port1,&pports->ip2,&pports->port2,dummy,dummy,dummy,dummy,dummy,dummy,&pst->sockfd);
           #ifdef DEBUG
             fprintf(stderr,"parsed: %x %x %x %x %llu\n",pports->ip1,pports->port1,pports->ip2,pports->port2,pst->sockfd);
-            fprintf(stderr,"parsed to human: %s %u %s %u %llu\n",inet_ntoa(*(struct in_addr*)&pports->ip1),pports->port1,inet_ntoa(*(struct in_addr*)&pports->ip2),pports->port2,pst->sockfd);
+            fprintf(stderr,"parsed to human: %s %u %s %u %llu\n",strdup(inet_ntoa(*(struct in_addr*)&pports->ip1)),pports->port1,strdup(inet_ntoa(*(struct in_addr*)&pports->ip2)),pports->port2,pst->sockfd);
           #endif
           sock_tcp_t *exists_sock_tcp;
           if((exists_sock_tcp=RB_INSERT(SOCK_ADDR, &head, pst))!=NULL){

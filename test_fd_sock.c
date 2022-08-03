@@ -11,7 +11,7 @@ int main(int argc,char *argv[]){
     RB_FOREACH(pst, FD_SOCK, sa){
         fprintf(stdout,"after inserted fd_sock: %llu %llu\n",pst->fd,pst->sockfd);
     }
-    unsigned long long sample_fd=609;
+    unsigned long long sample_fd=385;
     printf("\nget sockno by fd %llu\n",sample_fd);
     fd_sock_t *found=get_fdsock_by_fd(sa, sample_fd);
     if(found==NULL){

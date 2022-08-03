@@ -6,16 +6,7 @@
 #include <arpa/inet.h>
 #include <string.h>
 
-#include "fd_sock.h"
-#include "sock_addr.h"
-
-
-#define BUFSIZE 1024
-
-typedef enum {
-   from,
-   to
-} dirt;
+#include "fd_route.h"
 
 
 fd_ports*
@@ -32,7 +23,9 @@ fd_to_ports(fd,sa_map,fs_map)
         return NULL;
 
     fd_ports* pports=&(pst->ports);
-    fprintf(stderr,"[DEBUG] get_socktcp_by_sock success: %s %u %s %u %llu\n",inet_ntoa(*(struct in_addr*)&pports->ip1),pports->port1,inet_ntoa(*(struct in_addr*)&pports->ip2),pports->port2,pst->sockfd);
+#ifdef DEBUG
+    fprintf(stderr,"[DEBUG] get_socktcp_by_sock success: %s %u %s %u %llu\n",strdup(inet_ntoa(*(struct in_addr*)&pports->ip1)),pports->port1,strdup(inet_ntoa(*(struct in_addr*)&pports->ip2)),pports->port2,pst->sockfd);
+#endif
     return pports;
 }
 
@@ -62,18 +55,3 @@ fds_to_route(fd1,fd2,fs_map,sa_map)
 }
 
 
-int 
-main(argc,argv)
-    int argc;
-    char *argv[];
-{
-    struct FD_SOCK* fs_map=create_fdsock_map("sample/socket_file");
-    struct SOCK_ADDR* sa_map=create_sockaddr_map("sample/proc_file");
-
-    int fd1=385;
-    int fd2=407;
-    char* res=fds_to_route(fd1,fd2,fs_map,sa_map);
-    printf("%s\n",res);
-
-    return 0;
-}
