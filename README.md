@@ -2,6 +2,12 @@
 
 追踪通过haproxy代理的服务的原始ip和端口
 
+## sample 1:
+~~~
+./haproxy_trace sample/haproxy_sess sample/socket_file sample/proc_file
+~~~
+
+## sample 2:
 ~~~
 [root@cmspmysql3 ~]# ./haproxy_trace
 src=10.224.16.202:61040 fe=mysql be=tcloud_mysql 10.224.16.202:61040 --> 10.224.16.18:3306 --> 10.224.16.94:23672 --> 10.168.119.80:3306
