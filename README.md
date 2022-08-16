@@ -2,12 +2,31 @@
 
 追踪通过haproxy代理的服务的原始ip和端口
 
+## compile
+
+~~~bash
+make
+make dst
+~~~
+
 ## sample 1:
+~~~
+./haproxy_trace.sh [/var/lib/haproxy/stats]
+~~~
+* comment: you can mod awk in haproxy_trace.sh to compatible different versions haproxy, my version is v1.5
+
+
+## sample 2:
+~~~
+./get_sess /var/lib/haproxy/stats
+~~~
+
+## sample 3:
 ~~~
 ./haproxy_trace sample/haproxy_sess sample/socket_file sample/proc_file
 ~~~
 
-## sample 2:
+## sample 4:
 ~~~
 [root@cmspmysql3 ~]# ./haproxy_trace
 src=10.224.16.202:61040 fe=mysql be=tcloud_mysql 10.224.16.202:61040 --> 10.224.16.18:3306 --> 10.224.16.94:23672 --> 10.168.119.80:3306
