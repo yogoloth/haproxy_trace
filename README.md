@@ -11,7 +11,7 @@ make dst
 
 ## sample 1:
 ~~~
-./haproxy_trace.sh [/var/lib/haproxy/stats]
+./haproxy_sess [/var/lib/haproxy/stats]
 ~~~
 * comment: you can mod awk in haproxy_trace.sh to compatible different versions haproxy, my version is v1.5
 
@@ -28,7 +28,7 @@ make dst
 
 ## sample 4:
 ~~~
-[root@cmspmysql3 ~]# ./haproxy_trace
+[root@cmspmysql3 ~]# ./haproxy_sess
 src=10.224.16.202:61040 fe=mysql be=tcloud_mysql 10.224.16.202:61040 --> 10.224.16.18:3306 --> 10.224.16.94:23672 --> 10.168.119.80:3306
 src=10.224.16.202:61142 fe=mysql be=tcloud_mysql 10.224.16.202:61142 --> 10.224.16.18:3306 --> 10.224.16.94:23808 --> 10.168.119.80:3306
 src=10.224.16.202:61478 fe=mysql be=tcloud_mysql 10.224.16.202:61478 --> 10.224.16.18:3306 --> 10.224.16.94:24362 --> 10.168.119.80:3306
