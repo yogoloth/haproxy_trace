@@ -9,11 +9,11 @@ dst: all
 	tar czf haproxy_trace.tar.gz haproxy_trace get_sess haproxy_trace.sh
 
 haproxy_trace: haproxy_trace.c fd_sock.c sock_addr.c fd_route.c
-	gcc -static -o $@ $^
+	gcc -static $(CFLAGS) -o $@ $^
 
 
 get_sess: get_sess.c
-	gcc -static -o $@ $^
+	gcc -static $(CFLAGS) -o $@ $^
 
 test: test_sock_addr test_fd_sock test_fd_route
 

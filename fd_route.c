@@ -41,18 +41,24 @@ fds_to_route(fd1,fd2,fs_map,sa_map)
     memset(buffer,'\0',BUFSIZE);
     char tmp_buf[BUFSIZE]={0};
     fd_ports* pports=fd_to_ports(fd1,sa_map,fs_map);
+    if (pports){
     //fprintf(stdout,"%s:%u --> %s:%u --> ",strdup(inet_ntoa(*(struct in_addr*)&pports->ip2)),pports->port2,strdup(inet_ntoa(*(struct in_addr*)&pports->ip1)),pports->port1);
     sprintf(tmp_buf,"%s:%u --> ",inet_ntoa(*(struct in_addr*)&pports->ip2),pports->port2);
     strcat(buffer,tmp_buf);
     sprintf(tmp_buf,"%s:%u --> ",inet_ntoa(*(struct in_addr*)&pports->ip1),pports->port1);
     strcat(buffer,tmp_buf);
+    }else{
+            strcat(buffer,"0.0.0.0:0 --> 0.0.0.0:0 ");
+    }
     pports=fd_to_ports(fd2,sa_map,fs_map);
-    //fprintf(stdout,"%s:%u --> %s:%u\n",strdup(inet_ntoa(*(struct in_addr*)&pports->ip1)),pports->port1,strdup(inet_ntoa(*(struct in_addr*)&pports->ip2)),pports->port2);
-    sprintf(tmp_buf,"%s:%u --> ",inet_ntoa(*(struct in_addr*)&pports->ip1),pports->port1);
-    strcat(buffer,tmp_buf);
-    sprintf(tmp_buf,"%s:%u",inet_ntoa(*(struct in_addr*)&pports->ip2),pports->port2);
-    strcat(buffer,tmp_buf);
+    if (pports){
+            //fprintf(stdout,"%s:%u --> %s:%u\n",strdup(inet_ntoa(*(struct in_addr*)&pports->ip1)),pports->port1,strdup(inet_ntoa(*(struct in_addr*)&pports->ip2)),pports->port2);
+            sprintf(tmp_buf,"%s:%u --> ",inet_ntoa(*(struct in_addr*)&pports->ip1),pports->port1);
+            strcat(buffer,tmp_buf);
+            sprintf(tmp_buf,"%s:%u",inet_ntoa(*(struct in_addr*)&pports->ip2),pports->port2);
+            strcat(buffer,tmp_buf);
+    }else{
+            strcat(buffer,"0.0.0.0:0 --> 0.0.0.0:0");
+    }
     return buffer;
 }
-
-
