@@ -1,4 +1,4 @@
-#include <sys/types.h>          /* See NOTES */
+#include <sys/types.h>      
 #include <sys/socket.h>
 #include <stdlib.h>
 #include <error.h>
@@ -40,13 +40,6 @@ main(argc,argv)
 		exit(EXIT_FAILURE);
 	}
 
-/*
-        ret=set_nonblocking(fd);
-	if(fd<0){
-		perror("fcntl");
-		exit(EXIT_FAILURE);
-	}
-*/
 
 	memset(&addr, 0, sizeof(struct sockaddr_un));
 	addr.sun_family = AF_UNIX;
@@ -85,13 +78,8 @@ main(argc,argv)
 				else
 					exit(EXIT_FAILURE);
 			}
-			//else if (ret == 0||ret < BUFFER_SIZE)
 			else if (ret == 0)
 				break;
-			//if (buffer[ret - 1] == 0){
-			//   break;
-			//}
-			//fprintf(stdout,"last_char %x size %d\n",buffer[ret-1],ret);
 
 			buffer[ret - 1] = 0;
 			printf("%s",buffer);

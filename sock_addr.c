@@ -78,10 +78,13 @@ create_sockaddr_map (proc_tcp_file)
             fprintf(stderr,"parsed to human: %s %u %s %u %llu\n",strdup(inet_ntoa(*(struct in_addr*)&pports->ip1)),pports->port1,strdup(inet_ntoa(*(struct in_addr*)&pports->ip2)),pports->port2,pst->sockfd);
           #endif
           sock_tcp_t *exists_sock_tcp;
-          if((exists_sock_tcp=RB_INSERT(SOCK_ADDR, &head, pst))!=NULL){
+          exists_sock_tcp=RB_INSERT(SOCK_ADDR, &head, pst);
+          #ifdef DEBUG
+          if(exists_sock_tcp!=NULL){
             fprintf(stderr,"[WARN] insert rb_SOCK_ADDR, sockfd %llu exists\n",exists_sock_tcp->sockfd);
           
           }
+          #endif
 
           //printf("after insert:\n");
           //sock_tcp_t* pst_2;
