@@ -48,7 +48,7 @@ fds_to_route(fd1,fd2,fs_map,sa_map)
     sprintf(tmp_buf,"%s:%u --> ",inet_ntoa(*(struct in_addr*)&pports->ip1),pports->port1);
     strcat(buffer,tmp_buf);
     }else{
-            strcat(buffer,"0.0.0.0:0 --> 0.0.0.0:0 ");
+            strcat(buffer,"0.0.0.0:0 --> 0.0.0.0:0 --> ");
     }
     pports=fd_to_ports(fd2,sa_map,fs_map);
     if (pports){
