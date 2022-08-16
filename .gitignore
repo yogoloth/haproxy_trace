@@ -3,4 +3,5 @@ test_sock_addr
 test_fd_sock
 test_fd_route
 get_sess
+haproxy_trace.tar.gz
 *.swp
