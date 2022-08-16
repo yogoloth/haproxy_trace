@@ -5,6 +5,8 @@ haproxy_trace: haproxy_trace.c fd_sock.c sock_addr.c fd_route.c
 	gcc -static -o $@ $^
 
 
+get_sess: get_sess.c
+
 test: test_sock_addr test_fd_sock test_fd_route
 
 

@@ -2,4 +2,5 @@ haproxy_trace
 test_sock_addr
 test_fd_sock
 test_fd_route
+get_sess
 *.swp
